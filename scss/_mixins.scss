@@ -1,0 +1,96 @@
+//themes
+@mixin dark{
+    @if $theme == dark{
+        @content;
+    }
+}
+
+@mixin light{
+    @if $theme == light{
+        @content;
+    }
+}
+
+@mixin default{
+    @if $theme == default{
+        @content;
+    }
+}
+
+//media queries
+@mixin tiny-screens(){
+    @media only screen and (max-width: 320px) {
+        @content;
+    }
+}
+
+@mixin small-screens(){
+    @media only screen and (max-width: 480px) {
+        @content;
+    }
+}
+
+@mixin medium-screens(){
+    @media only screen and (max-width: 680px) {
+        @content;
+    }
+}
+
+@mixin large-screens(){
+    @media only screen and (max-width: 960px) {
+        @content;
+    }
+}
+
+//google fonts
+@mixin google-font($font){
+    $font: unquote($font);
+    @import url(https://fonts.googleapis.com/css?family=#{$font});
+}
+
+//simple mixin
+@mixin warning{
+    background-color: orange;
+    color: white;
+
+    &:hover{
+        background-color: lighten(orange, 20%);
+    }
+}
+
+//just IE 6
+@mixin apply-to-ie-6{
+    * html{
+        @content;
+    }
+}
+
+//one or more arguments to the same type
+@mixin box-shadow($shadow...){
+    box-shadow: $shadow;
+}
+
+//many attribute types for the same property
+@mixin large-text{
+    font: {
+        size: 22px;
+        weight: bold;
+    }
+}
+
+//default values
+@mixin rounded($radius: 6px){
+    border-radius: $radius;
+}
+
+@mixin box($radius: 6px, $border: 1px solid #000){
+    @include rounded($radius);
+    border: $border;
+}
+
+@mixin fancy-links{
+    a{
+        font-style: italic;
+        text-decoration: none;
+    }
+}

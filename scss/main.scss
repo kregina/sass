@@ -1,0 +1,162 @@
+@import "functions";
+@import "variables";
+@import "mixins";
+
+@for $i from 1 through 12 {
+  .col-#{$i}{
+    width:  $i * 2em;
+  }
+}
+
+$logos: facebook, twitter, instagram;
+@each $logo in $logos{
+  .#{$logo}-logo{
+    background-image: url('/img/#{$logo}.svg');
+  }
+}
+
+$font-sizes: (tiny: 8px, small: 11px, medium: 13px, large: 18px);
+@each $name, $size in $font-sizes{
+  .#{$name}{
+    font-size: $size;
+  }
+}
+
+$j: 2;
+@while $j <= 8{
+  .picture-#{$j}{
+    width: $j * 10%;
+  }
+  $j: $j + 2;
+}
+
+@include google-font("Alegreya+Sans");
+@include google-font("Titillium+Web");
+
+@include fancy-links;
+
+@include apply-to-ie-6{
+  body{
+    font-size: 125%;
+  }
+}
+
+body {
+  background-color: $body-background-color;
+  font-family: $text-font;
+  color: $text-color;
+  margin: 0;
+  padding: 0;
+  font-size: em(18px);
+
+  @include large-screens {
+    font-size: 125%;
+  }
+}
+
+h1, h2, h3, h4 {
+  font-family: $headline-font;
+}
+
+h2{
+  @include large-text;
+}
+
+p {
+  font-family: $text-font;
+}
+
+a {
+  color: $link-color;
+
+  @include dark{
+    color: #8779ff;
+  }
+
+  &:hover{
+    color: darken($link-color, 15%);
+  }
+}
+
+.warning-button{
+  @include warning;
+  padding: 8px 12px;
+}
+
+.cta-button{
+  @extend .warning-button !optional;
+  @include rounded;
+  font-weight: bold;
+}
+
+.super-cta-button{
+  @extend .cta-button;
+  font-size: em(20px);
+}
+
+#header {
+  @include box($border: 1px solid #999, $radius: 6px);
+  @include box-shadow(1px 1px 6px $secondary-color);
+  background-color: $theme-color;
+  height: $header-height;
+  
+  #main-menu {
+    li{
+      display: inline;
+    }
+    a{
+      color: $menu-item-color;
+      border-bottom: 1px solid transparentize(#fefefe, 1);
+      transition: border-bottom .5s;
+      transition-timing-function: ease-in-out;
+      padding: 6px 8px;
+    
+    &:hover{
+      border-bottom: 1px solid opacify(#fefefe, .5);
+    }
+    }
+  }
+  
+  #logo {
+    
+  }
+}
+
+#main {
+  width: $content-width;
+  @include large-screens{
+    margin: auto;
+    max-width: $content-width;
+  }
+  margin: auto;
+  
+  #content {
+    float: left;
+    width: 8*$col;
+  }
+  
+  #sidebar {
+    float: right;
+    width: 4*$col;
+
+    li{
+      list-style-type: none;
+      padding: em(16px) em(20px);
+      border-bottom: 1px dashed #999;
+
+      &:hover{
+        background-color: #efefef;
+      }
+    }
+  }
+}
+
+#footer {
+  clear: both;
+  height: $footer-height;
+  background-color: $ternary-color;
+
+  @include light{
+    border-top: 5px solid darken($ternary-color, 15%);
+  }
+}
